@@ -16,27 +16,21 @@ class GraphicsPainter(private var g2d: Graphics2D) : Painter {
         g2d = stack.pop()
     }
 
-    override fun translate(x: Double, y: Double) {
-        g2d.translate(x, y)
-    }
+    override fun translate(x: Double, y: Double) = g2d.translate(x, y)
 
-    override fun rotate(theta: Double) {
-        g2d.rotate(theta)
-    }
+
+    override fun rotate(theta: Double) = g2d.rotate(theta)
+
 
     override fun setFillColor(color: Color) {
         g2d.color = ktColorToAwt(color)
     }
 
-    private fun ktColorToAwt(color: Color) : java.awt.Color {
-        return java.awt.Color(color.red, color.green, color.blue, color.alpha)
-    }
+    private fun ktColorToAwt(color: Color) : java.awt.Color = java.awt.Color(color.red, color.green, color.blue, color.alpha)
 
-    override fun fillRect(x: Double, y: Double, width: Double, height: Double) {
-        g2d.fillRect(x.toInt(), y.toInt(), width.toInt(), height.toInt())
-    }
 
-    fun drawBufferedImage(image: BufferedImage) {
-        g2d.drawImage(image, 0, 0, null)
-    }
+    override fun fillRect(x: Double, y: Double, width: Double, height: Double) = g2d.fillRect(x.toInt(), y.toInt(), width.toInt(), height.toInt())
+
+
+    fun drawBufferedImage(image: BufferedImage) = g2d.drawImage(image, 0, 0, null)
 }
