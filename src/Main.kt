@@ -1,5 +1,5 @@
 import wylaga.Wylaga
-import wylaga.control.KeyboardController
+import wylaga.input.KeyboardAdapter
 import wylaga.view.display.DisplayPanel
 import wylaga.view.display.image.decodeToBufferedImage
 import java.awt.event.KeyEvent
@@ -9,23 +9,7 @@ import javax.swing.SwingUtilities
 import javax.swing.Timer
 import javax.swing.WindowConstants
 
-object Timing {
-    private val timer = Timer(16) { tick() }
-
-    private fun tick() {
-        timer.stop()
-        onUpdate()
-        timer.restart()
-    }
-
-    var onUpdate = {}
-
-    fun start() = timer.start()
-}
-
-fun main() {
-    SwingUtilities.invokeLater { createAndShowGui() }
-}
+fun main() = SwingUtilities.invokeLater { createAndShowGui() }
 
 fun createAndShowGui() {
     val frame = JFrame()
@@ -54,8 +38,22 @@ fun createAndShowGui() {
     Timing.start()
 }
 
+object Timing {
+    private val timer = Timer(16) { tick() }
+
+    private fun tick() {
+        timer.stop()
+        onUpdate()
+        timer.restart()
+    }
+
+    var onUpdate = {}
+
+    fun start() = timer.start()
+}
+
 class KeyController(wylaga: Wylaga) : KeyListener {
-    private val controller = KeyboardController(wylaga)
+    private val controller = KeyboardAdapter(wylaga)
 
     override fun keyPressed(e: KeyEvent) = controller.keyDown(e.keyCode)
     override fun keyReleased(e: KeyEvent) = controller.keyUp(e.keyCode)
