@@ -1,5 +1,5 @@
 import wylaga.Wylaga
-import wylaga.input.KeyboardAdapter
+import wylaga.external.KeyboardAdapter
 import wylaga.view.display.DisplayPanel
 import wylaga.view.display.image.decodeToBufferedImage
 import java.awt.event.KeyEvent
