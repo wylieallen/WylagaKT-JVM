@@ -2,6 +2,7 @@ import wylaga.Wylaga
 import wylaga.external.KeyboardAdapter
 import wylaga.view.display.DisplayPanel
 import wylaga.view.display.image.decodeToBufferedImage
+import java.awt.Dimension
 import java.awt.event.KeyEvent
 import java.awt.event.KeyListener
 import javax.swing.JFrame
@@ -16,11 +17,11 @@ fun createAndShowGui() {
     val wylaga = Wylaga(decodeToBufferedImage)
     val panel = DisplayPanel(wylaga)
 
-    panel.setSize(1600, 900)
-    frame.setSize(1600 + 16, 900 + 39)
+    panel.preferredSize = Dimension(1600, 900)
 
     frame.title = "WylagaKT for the JVM"
     frame.contentPane = panel
+    frame.pack()
     frame.validate()
     frame.isVisible = true
     frame.isResizable = false
