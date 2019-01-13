@@ -13,26 +13,19 @@ class GraphicsPainter(private var g2d: Graphics2D) : Painter {
         g2d = g2d.create() as Graphics2D
     }
 
-    override fun pop() {
-        g2d = stack.pop()
-    }
+    override fun pop() { g2d = stack.pop() }
 
     override fun translate(x: Double, y: Double) = g2d.translate(x, y)
     override fun rotate(theta: Double) = g2d.rotate(theta)
 
-    override fun setColor(color: Color) {
-        g2d.color = ktColorToAwt(color)
-    }
-
-    override fun setFont(typeface: String, size: Int) {
-        g2d.font = Font(typeface, Font.PLAIN, size)
-    }
-
+    override fun setColor(color: Color) { g2d.color = ktColorToAwt(color) }
     private fun ktColorToAwt(color: Color) : java.awt.Color = java.awt.Color(color.red, color.green, color.blue, color.alpha)
 
-    override fun fillRect(x: Double, y: Double, width: Double, height: Double) = g2d.fillRect(x.toInt(), y.toInt(), width.toInt(), height.toInt())
-    override fun drawString(string: String) = g2d.drawString(string, 0, 0)
+    override fun setFont(typeface: String, size: Int) { g2d.font = Font(typeface, Font.PLAIN, size) }
 
+    override fun fillRect(x: Double, y: Double, width: Double, height: Double) = g2d.fillRect(x.toInt(), y.toInt(), width.toInt(), height.toInt())
+
+    override fun drawString(string: String) = g2d.drawString(string, 0, 0)
 
     fun drawBufferedImage(image: BufferedImage) = g2d.drawImage(image, 0, 0, null)
 }

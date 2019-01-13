@@ -2,6 +2,7 @@ import wylaga.Wylaga
 import wylaga.external.KeyboardAdapter
 import wylaga.view.display.DisplayPanel
 import wylaga.view.display.image.decodeToBufferedImage
+import java.awt.BorderLayout
 import java.awt.Dimension
 import java.awt.event.KeyEvent
 import java.awt.event.KeyListener
@@ -20,14 +21,13 @@ fun createAndShowGui() {
     panel.preferredSize = Dimension(1600, 900)
 
     frame.title = "WylagaKT for the JVM"
-    frame.contentPane = panel
+    frame.contentPane.add(panel, BorderLayout.CENTER)
     frame.pack()
+    frame.size = Dimension(1606, 929)
     frame.validate()
     frame.isVisible = true
     frame.isResizable = false
     frame.defaultCloseOperation = WindowConstants.EXIT_ON_CLOSE
-
-    panel.background = java.awt.Color.BLACK
 
     frame.addKeyListener(KeyController(wylaga))
 
